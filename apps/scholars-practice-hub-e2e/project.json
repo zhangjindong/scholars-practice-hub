@@ -1,0 +1,10 @@
+{
+  "name": "scholars-practice-hub-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/scholars-practice-hub-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["scholars-practice-hub"],
+  "// targets": "to see all targets run: nx show project scholars-practice-hub-e2e --web",
+  "targets": {}
+}

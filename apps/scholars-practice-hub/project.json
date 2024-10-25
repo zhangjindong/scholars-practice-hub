@@ -1,0 +1,9 @@
+{
+  "name": "scholars-practice-hub",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/scholars-practice-hub/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project scholars-practice-hub --web",
+  "targets": {}
+}

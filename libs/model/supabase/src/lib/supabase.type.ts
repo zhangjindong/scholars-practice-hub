@@ -294,42 +294,42 @@ export interface Database {
           chapter: string | null
           correct_answer: string | null
           created_at: string | null
-          difficulty: number | null
+          difficulty: Database["public"]["Enums"]["difficulty"] | null
           explanation: string | null
           id: number
           options: Json | null
           question_content: string | null
           question_id: number
-          question_type: number | null
-          subject: string | null
+          question_type: Database["public"]["Enums"]["question_type"] | null
+          subject: Database["public"]["Enums"]["subject"] | null
           updated_at: string | null
         }
         Insert: {
           chapter?: string | null
           correct_answer?: string | null
           created_at?: string | null
-          difficulty?: number | null
+          difficulty?: Database["public"]["Enums"]["difficulty"] | null
           explanation?: string | null
           id?: number
           options?: Json | null
           question_content?: string | null
           question_id: number
-          question_type?: number | null
-          subject?: string | null
+          question_type?: Database["public"]["Enums"]["question_type"] | null
+          subject?: Database["public"]["Enums"]["subject"] | null
           updated_at?: string | null
         }
         Update: {
           chapter?: string | null
           correct_answer?: string | null
           created_at?: string | null
-          difficulty?: number | null
+          difficulty?: Database["public"]["Enums"]["difficulty"] | null
           explanation?: string | null
           id?: number
           options?: Json | null
           question_content?: string | null
           question_id?: number
-          question_type?: number | null
-          subject?: string | null
+          question_type?: Database["public"]["Enums"]["question_type"] | null
+          subject?: Database["public"]["Enums"]["subject"] | null
           updated_at?: string | null
         }
         Relationships: []
@@ -375,7 +375,9 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      difficulty: "1" | "2" | "3" | "4" | "5"
+      question_type: "Chinese" | "Mathematics" | "English" | "Science"
+      subject: "Chinese" | "Mathematics" | "English" | "Science"
     }
     CompositeTypes: {
       [_ in never]: never

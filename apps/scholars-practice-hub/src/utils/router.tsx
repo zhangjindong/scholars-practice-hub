@@ -1,2 +1,6 @@
 import App from '../app/app';
-export const router = [{ path: '/', element: <App /> }];
+import Login from '../app/login';
+export const router = [
+  { path: '/', element: <App /> },
+  { path: '/login', element: <Login /> },
+];

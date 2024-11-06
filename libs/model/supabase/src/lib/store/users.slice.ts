@@ -6,7 +6,11 @@ import {
   EntityState,
   PayloadAction,
 } from '@reduxjs/toolkit';
-
+import {
+  AuthTokenResponsePassword,
+  SignInWithPasswordCredentials,
+} from '@supabase/supabase-js';
+import { login } from '../supabase';
 export const USERS_FEATURE_KEY = 'users';
 
 /*
@@ -14,6 +18,12 @@ export const USERS_FEATURE_KEY = 'users';
  */
 export interface UsersEntity {
   id: number;
+}
+
+export interface LoginEntity {
+  name: string;
+  email: string;
+  password: string;
 }
 
 export interface UsersState extends EntityState<UsersEntity, number> {
@@ -49,8 +59,19 @@ export const fetchUsers = createAsyncThunk<UsersEntity[]>(
      * Right now we just return an empty array.
      */
     return Promise.resolve([]);
-  }
+  },
 );
+export const fetchLogin = createAsyncThunk<
+  AuthTokenResponsePassword,
+  SignInWithPasswordCredentials
+>('users/fetchLogin', async (payload, thunkAPI) => {
+  /**
+   * Replace this with your custom fetch call.
+   * For example, `return myApi.getUserss()`;
+   * Right now we just return an empty array.
+   */
+  return login(payload);
+});
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   loadingStatus: 'not loaded',
@@ -75,7 +96,7 @@ export const usersSlice = createSlice({
         (state: UsersState, action: PayloadAction<UsersEntity[]>) => {
           usersAdapter.setAll(state, action.payload);
           state.loadingStatus = 'loaded';
-        }
+        },
       )
       .addCase(fetchUsers.rejected, (state: UsersState, action) => {
         state.loadingStatus = 'error';
@@ -133,5 +154,5 @@ export const selectAllUsers = createSelector(getUsersState, selectAll);
 
 export const selectUsersEntities = createSelector(
   getUsersState,
-  selectEntities
+  selectEntities,
 );

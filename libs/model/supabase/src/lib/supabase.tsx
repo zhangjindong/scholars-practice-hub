@@ -1,4 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
+import {
+  createClient,
+  SignInWithPasswordCredentials,
+} from '@supabase/supabase-js';
 import { Database } from './supabase.type';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseKey = import.meta.env.VITE_ANON_KEY || '';
@@ -7,12 +10,6 @@ export async function getQuestions() {
   return await supabase.from('questions').select();
   // setCountries(data);
 }
-// export function Supabase() {
-//   return (
-//     <div>
-//       <h1>Welcome to Supabase!</h1>
-//     </div>
-//   );
-// }
 
-// export default Supabase;
+export const login = (credentials: SignInWithPasswordCredentials) =>
+  supabase.auth.signInWithPassword(credentials);

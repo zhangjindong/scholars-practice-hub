@@ -1,12 +1,25 @@
 import { useState } from 'react';
 import classNames from 'classnames';
+import { fetchLogin } from '@scholars-practice-hub/supabase';
+import { SignInWithPasswordCredentials } from '@supabase/supabase-js';
+import { useAppDispatch } from '../store';
 
 export function Login() {
   const inputClass = ` p-4 outline-none block w-full rounded-full border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-java-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-java-600 sm:text-sm/6`;
   const [active, setActive] = useState('login');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const dispatch = useAppDispatch();
+  const dd: SignInWithPasswordCredentials = { email, password };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchLogin(dd));
+    // Add form submission logic here
+  };
   return (
     <div className="flex h-full flex-row items-center justify-evenly gap-8 bg-[#FFFEFC] px-10 py-9">
-      <div className="h-full w-[40rem] rounded-[2.42rem] bg-[url('/image.png')] bg-cover bg-no-repeat bg-origin-border max-md:hidden">
+      <div className="h-full w-1/2 rounded-[2.42rem] bg-[url('/image.png')] bg-cover bg-no-repeat bg-origin-border max-md:hidden">
         <div className="text-group_1 flex-col justify-between"></div>
       </div>
       <div className="flex h-2/3 w-[30rem] flex-col justify-evenly">
@@ -46,6 +59,8 @@ export function Login() {
             placeholder="请输入邮箱地址"
             type="text"
             className={inputClass}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </div>
         <span className="">User&nbsp;name</span>
@@ -55,6 +70,8 @@ export function Login() {
             placeholder="请输入用户名"
             type="text"
             className={inputClass}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
           />
         </div>
         <span className="">Password</span>
@@ -64,6 +81,8 @@ export function Login() {
             placeholder="请输入密码"
             type="password"
             className={inputClass}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </div>
         <div className="flex justify-between">
@@ -79,7 +98,10 @@ export function Login() {
 
           <span className="">忘记密码?</span>
         </div>
-        <button className="bg-java-400 w-1/2 self-end rounded-full p-4 text-center text-white">
+        <button
+          className="bg-java-400 w-1/2 self-end rounded-full p-4 text-center text-white"
+          onClick={handleSubmit}
+        >
           <span className="">登录</span>
         </button>
       </div>
